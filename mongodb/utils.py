@@ -11,7 +11,6 @@ class mongodb_funciones:
     
     def seleccionar_coleccion(self, nombre_coleccion):
         db = self.cliente.db_marketplace
-        nombre_coleccion = db.list_collection_names()[5]
         coleccion = db[nombre_coleccion]
         return coleccion
 
@@ -23,5 +22,9 @@ class mongodb_funciones:
 
     def datos_con_aggregation_personalizado(self, nombre_coleccion):
         pipeline = aggregation_personalizado()
+        print(f"Pipeline utilizado: {pipeline}")
         coleccion = self.seleccionar_coleccion(nombre_coleccion)
-        return list(coleccion.aggregate(pipeline))
+        print(f"Colección seleccionada: {coleccion.name}")
+        resultados = list(coleccion.aggregate(pipeline))
+        print(f"Resultados de la agregación: {resultados}")
+        return resultados
